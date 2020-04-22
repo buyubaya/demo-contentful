@@ -1,0 +1,9 @@
+,
+  "routes": [
+    {
+      "src": "^/(.*).html",
+      "headers": {
+        "Cache-Control": "public, max-age=1, stale-while-revalidate"
+        }
+      }
+  ]
