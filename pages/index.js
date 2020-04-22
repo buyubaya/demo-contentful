@@ -114,10 +114,8 @@ HomePage.getInitialProps = async ({ res }) => {
   cachePageFor(10);
 
   return {
-    props: {
-      posts: allPosts,
-      pageDataHash: pageDataHash,
-    }
+    posts: allPosts,
+    pageDataHash: pageDataHash,
   };
 }
 
