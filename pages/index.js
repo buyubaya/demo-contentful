@@ -96,14 +96,16 @@ function HomePage({ posts = [], pageDataHash }) {
   )
 }
 
-HomePage.getInitialProps = async ({ res }) => {
+
+export async function getStaticProps({ res }) {
   const allPosts = await fetchEntries();
-  console.log('allPosts', allPosts)
   const pageDataHash = setVersionHeader(allPosts, res);
 
   return {
-    posts: allPosts,
-    pageDataHash: pageDataHash,
+    props: {
+      posts: allPosts,
+      pageDataHash: pageDataHash,
+    }
   };
 }
 
