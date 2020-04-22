@@ -33,16 +33,26 @@ function HomePage() {
     })();
   }, []);
 
-  const handleClick = () => {
-    fetch(window.location, {
+  // const handleClick = () => {
+  //   fetch(window.location, {
+  //     headers: {
+  //       pragma: "no-cache"
+  //     }
+  //   })
+  //     .then(async (res) => {
+  //       console.log('res', await res.json());
+  //       // window.location.reload();
+  //     })
+  // };
+
+  const handleClick = async () => {
+    const res = await fetch("/api/test", {
       headers: {
         pragma: "no-cache"
-      }
-    })
-      .then(async (res) => {
-        console.log('res', await res.json());
-        // window.location.reload();
-      })
+      },
+    });
+    const json = await res.json();
+    setPosts(json.posts);
   };
 
   return (
