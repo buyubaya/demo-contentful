@@ -2,6 +2,8 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import Post from '../components/post'
 import fetch from "node-fetch";
+import { setVersionHeader } from '../lib/setVersionHeader';
+import { useFocusReload } from '../lib/useFocusReload';
 
 
 const client = require('contentful').createClient({
@@ -22,16 +24,18 @@ async function fetchEntries() {
 }
 
 
-function HomePage() {
-  const [posts, setPosts] = useState([]);
+function HomePage({ posts = [], pageDataHash }) {
+  useFocusReload(pageDataHash);
 
-  useEffect(() => {
-    (async () => {
-      const res = await fetch("/api/test");
-      const json = await res.json();
-      setPosts(json.posts);
-    })();
-  }, []);
+  // const [posts, setPosts] = useState([]);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const res = await fetch("/api/test");
+  //     const json = await res.json();
+  //     setPosts(json.posts);
+  //   })();
+  // }, []);
 
   // const handleClick = () => {
   //   fetch(window.location, {
@@ -45,15 +49,19 @@ function HomePage() {
   //     })
   // };
 
-  const handleClick = async () => {
-    const res = await fetch("/api/test", {
-      headers: {
-        pragma: "no-cache"
-      },
-    });
-    const json = await res.json();
-    setPosts(json.posts);
-  };
+  // const handleClick = async () => {
+  //   const res = await fetch("/api/test", {
+  //     headers: {
+  //       pragma: "no-cache"
+  //     },
+  //   });
+  //   const json = await res.json();
+  //   setPosts(json.posts);
+  // };
+
+  const handleClick = async () => {}
+
+  console.log('POSTS', posts)
 
   return (
     <>
@@ -88,16 +96,16 @@ function HomePage() {
   )
 }
 
+HomePage.getInitialProps = async ({ res }) => {
+  const allPosts = await fetchEntries();
+  console.log('allPosts', allPosts)
+  const pageDataHash = setVersionHeader(allPosts, res);
 
-// export async function getStaticProps() {
-//   const allPosts = await fetchEntries()
-
-//   return {
-//     props: {
-//       posts: allPosts,
-//     },
-//   };
-// }
+  return {
+    posts: allPosts,
+    pageDataHash: pageDataHash,
+  };
+}
 
 
 export default HomePage;
