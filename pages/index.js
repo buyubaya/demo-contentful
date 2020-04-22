@@ -25,7 +25,13 @@ async function fetchEntries() {
 
 
 function HomePage({ posts = [], pageDataHash }) {
-  useFocusReload(pageDataHash);
+
+  const [dataChanged, setDataChanged] = useState(false);
+
+  useFocusReload(pageDataHash, () => {
+    console.log('DATA CHANGED! REFRESH NOW!');
+    setDataChanged(true);
+  });
 
   // const [posts, setPosts] = useState([]);
 
@@ -59,7 +65,9 @@ function HomePage({ posts = [], pageDataHash }) {
   //   setPosts(json.posts);
   // };
 
-  const handleClick = async () => {}
+  const handleClick = async () => {
+    window.location.reload();
+  }
 
   console.log('POSTS', posts)
 
@@ -76,7 +84,9 @@ function HomePage({ posts = [], pageDataHash }) {
       
       <h1>HELLO HOME</h1>
 
-      <button onClick={handleClick}>REFRESH</button>
+      {
+        dataChanged && <button onClick={handleClick}>DATA CHANGED! REFRESH NOW!</button>
+      }
 
       <div>
       {(posts || []).length > 0
