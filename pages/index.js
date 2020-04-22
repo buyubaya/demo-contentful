@@ -4,6 +4,7 @@ import Post from '../components/post'
 import fetch from "node-fetch";
 import { setVersionHeader } from '../lib/setVersionHeader';
 import { useFocusReload } from '../lib/useFocusReload';
+import { cachePageFor } from '../lib/cachePageFor';
 
 
 const client = require('contentful').createClient({
@@ -110,6 +111,7 @@ function HomePage({ posts = [], pageDataHash }) {
 export async function getStaticProps({ res }) {
   const allPosts = await fetchEntries();
   const pageDataHash = setVersionHeader(allPosts, res);
+  cachePageFor(10);
 
   return {
     props: {
