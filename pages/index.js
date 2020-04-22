@@ -108,14 +108,16 @@ function HomePage({ posts = [], pageDataHash }) {
 }
 
 
-HomePage.getInitialProps = async ({ res }) => {
+export async function getStaticProps ({ res }) {
   const allPosts = await fetchEntries();
   const pageDataHash = setVersionHeader(allPosts, res);
   cachePageFor(10);
 
   return {
-    posts: allPosts,
-    pageDataHash: pageDataHash,
+    props: {
+      posts: allPosts,
+      pageDataHash: pageDataHash,
+    }
   };
 }
 
