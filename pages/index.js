@@ -15,13 +15,23 @@ async function fetchEntries() {
     const entries = await client.getEntries()
     if (entries.items) return entries.items
     console.log(`Error getting Entries for ${contentType.name}.`)
+    return entries;
   } catch (error) {
     console.log("ERROR", error);
   }
 }
 
 
-function HomePage({ posts = [] }) {
+function HomePage() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const res = await fetch("/api/test");
+      const json = await res.json();
+      setPosts(json.posts);
+    })();
+  }, []);
 
   const handleClick = () => {
     fetch(window.location, {
@@ -51,7 +61,7 @@ function HomePage({ posts = [] }) {
       <button onClick={handleClick}>REFRESH</button>
 
       <div>
-      {posts.length > 0
+      {(posts || []).length > 0
         ? posts.map(p => (
             <Post
               alt={p.fields.alt}
@@ -69,15 +79,15 @@ function HomePage({ posts = [] }) {
 }
 
 
-export async function getStaticProps() {
-  const allPosts = await fetchEntries()
+// export async function getStaticProps() {
+//   const allPosts = await fetchEntries()
 
-  return {
-    props: {
-      posts: allPosts,
-    },
-  };
-}
+//   return {
+//     props: {
+//       posts: allPosts,
+//     },
+//   };
+// }
 
 
 export default HomePage;

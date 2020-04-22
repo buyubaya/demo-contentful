@@ -13,6 +13,7 @@ async function fetchEntries() {
     const entries = await client.getEntries()
     if (entries.items) return entries.items
     console.log(`Error getting Entries for ${contentType.name}.`)
+    return entries;
   } catch (error) {
     console.log("ERROR", error);
   }
