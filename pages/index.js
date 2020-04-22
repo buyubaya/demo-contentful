@@ -108,7 +108,7 @@ function HomePage({ posts = [], pageDataHash }) {
 }
 
 
-Home.getInitialProps = async ({ res }) => {
+HomePage.getInitialProps = async ({ res }) => {
   const allPosts = await fetchEntries();
   const pageDataHash = setVersionHeader(allPosts, res);
   cachePageFor(10);
