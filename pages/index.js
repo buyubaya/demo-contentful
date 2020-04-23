@@ -88,7 +88,7 @@ function HomePage({ posts = [], pageDataHash }) {
       <h1>HELLO HOME</h1>
 
       {
-        dataChanged && <button onClick={handleClick}>DATA CHANGED! REFRESH NOW!</button>
+        dataChanged && <div onClick={handleClick}>DATA CHANGED! REFRESH NOW!</div>
       }
 
       <div>
