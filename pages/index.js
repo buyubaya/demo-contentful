@@ -27,7 +27,7 @@ async function fetchEntries() {
 }
 
 
-function HomePage({ posts = [], pageDataHash }) {
+function HomePage({ posts = [], pageDataHash, xVersion }) {
 
   const [dataChanged, setDataChanged] = useState(false);
 
@@ -85,7 +85,7 @@ function HomePage({ posts = [], pageDataHash }) {
         />
       </Head>
       
-      <h1>HELLO HOME</h1>
+      <h1>HELLO HOME - {xVersion}</h1>
 
       {
         dataChanged && <button onClick={handleClick}>DATA CHANGED! REFRESH NOW!</button>
@@ -112,13 +112,14 @@ function HomePage({ posts = [], pageDataHash }) {
 
 export async function getStaticProps ({ res }) {
   const allPosts = await fetchEntries();
-  // const pageDataHash = setVersionHeader(allPosts, res);
+  const xVersion = setVersionHeader(allPosts, res);
   // cachePageFor(10);
 
   return {
     props: {
       posts: allPosts,
       pageDataHash: Date.now(),
+      xVersion: xVersion,
     },
     unstable_revalidate: 1
   };
