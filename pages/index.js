@@ -113,7 +113,7 @@ function HomePage({ posts = [], pageDataHash, xVersion }) {
 export async function getStaticProps ({ res }) {
   const allPosts = await fetchEntries();
   const xVersion = setVersionHeader(allPosts, res);
-  // cachePageFor(10, res);
+  cachePageFor(10, res);
 
   return {
     props: {
