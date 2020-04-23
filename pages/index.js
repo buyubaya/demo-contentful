@@ -15,7 +15,9 @@ const client = require('contentful').createClient({
 
 async function fetchEntries() {
   try {
-    const entries = await client.getEntries()
+    const entries = await client.getEntries({
+      content_type: "blogPost"
+    })
     if (entries.items) return entries.items
     console.log(`Error getting Entries for ${contentType.name}.`)
     return entries;
@@ -117,7 +119,8 @@ export async function getStaticProps ({ res }) {
     props: {
       posts: allPosts,
       pageDataHash: pageDataHash,
-    }
+    },
+    unstable_revalidate: 1
   };
 }
 
