@@ -121,6 +121,7 @@ export async function getStaticProps ({ res }) {
       pageDataHash: Date.now(),
       xVersion: xVersion,
     },
+    unstable_revalidate: 1,
   };
 }
 
