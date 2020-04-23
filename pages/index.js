@@ -32,7 +32,7 @@ function HomePage({ posts = [], pageDataHash }) {
   const [dataChanged, setDataChanged] = useState(false);
 
   useFocusReload(pageDataHash, ({ previous, current }) => {
-    console.log('DATA CHANGED! REFRESH NOW!');
+    console.log('DATA CHANGED! REFRESH NOW!', previous, current);
     setDataChanged(true);
   });
 
