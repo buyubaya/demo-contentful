@@ -112,13 +112,13 @@ function HomePage({ posts = [], pageDataHash }) {
 
 export async function getStaticProps ({ res }) {
   const allPosts = await fetchEntries();
-  const pageDataHash = setVersionHeader(allPosts, res);
-  cachePageFor(10);
+  // const pageDataHash = setVersionHeader(allPosts, res);
+  // cachePageFor(10);
 
   return {
     props: {
       posts: allPosts,
-      pageDataHash: pageDataHash,
+      pageDataHash: Date.now(),
     },
     unstable_revalidate: 1
   };
