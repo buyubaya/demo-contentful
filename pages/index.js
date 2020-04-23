@@ -118,7 +118,7 @@ export async function getStaticProps ({ res }) {
   return {
     props: {
       posts: allPosts,
-      pageDataHash: Date.now(),
+      pageDataHash: xVersion,
       xVersion: xVersion,
     },
     unstable_revalidate: 1,
