@@ -27,12 +27,12 @@ async function fetchEntries() {
 }
 
 
-function HomePage({ posts = [], pageDataHash, xVersion }) {
+function HomePage({ posts = [], pageDataHash }) {
 
   const [dataChanged, setDataChanged] = useState(false);
 
   useFocusReload(pageDataHash, ({ previous, current }) => {
-    console.log('DATA CHANGED! REFRESH NOW!', previous, current);
+    console.log('DATA CHANGED! REFRESH NOW!');
     setDataChanged(true);
   });
 
@@ -72,7 +72,7 @@ function HomePage({ posts = [], pageDataHash, xVersion }) {
     window.location.reload();
   }
 
-  console.log('POSTS', posts)
+  // console.log('POSTS', posts)
 
   return (
     <>
@@ -85,7 +85,7 @@ function HomePage({ posts = [], pageDataHash, xVersion }) {
         />
       </Head>
       
-      <h1>HELLO HOME - {xVersion}</h1>
+      <h1>HELLO HOME</h1>
 
       {
         dataChanged && <button onClick={handleClick}>DATA CHANGED! REFRESH NOW!</button>
@@ -119,7 +119,6 @@ export async function getStaticProps ({ res }) {
     props: {
       posts: allPosts,
       pageDataHash: xVersion,
-      xVersion: xVersion,
     },
     unstable_revalidate: 1,
   };
