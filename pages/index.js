@@ -31,8 +31,8 @@ function HomePage({ posts = [], pageDataHash, xVersion }) {
 
   const [dataChanged, setDataChanged] = useState(false);
 
-  useFocusReload(pageDataHash, () => {
-    console.log('DATA CHANGED! REFRESH NOW!');
+  useFocusReload(pageDataHash, ({ previous, current }) => {
+    console.log('DATA CHANGED! REFRESH NOW!', previous, current);
     setDataChanged(true);
   });
 
