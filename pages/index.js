@@ -9,7 +9,9 @@ import { cachePageFor } from '../lib/cachePageFor';
 
 const client = require('contentful').createClient({
   space: "rpawvh52ui6g",
-  accessToken: "OLRHxqJs-ydHv9blPC-rFPk3BzREGcIY_SKpFZUYkYA"
+  // accessToken: "OLRHxqJs-ydHv9blPC-rFPk3BzREGcIY_SKpFZUYkYA",
+  accessToken: "kAtYskTFWBeGYrw9xYrav0MwCIQlRTRS-YlBlvNpYj8",
+  host: "preview.contentful.com"
 })
 
 
